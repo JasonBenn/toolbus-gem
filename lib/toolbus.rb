@@ -1,3 +1,5 @@
-# set up gem's code, api
-
-puts 'sup'
+class Toolbus
+  def scan
+    puts 'hiii'
+  end
+end
