@@ -45,6 +45,10 @@ def git_status_clean?
   `git status -s`.length == 0
 end
 
+def latest_commit_online?
+  `git log --oneline origin/master..HEAD`.length == 0
+end
+
 def println(color, message)
   print color
   puts message
@@ -52,26 +56,30 @@ def println(color, message)
 end
 
 class Toolbus
-  def self.scan
 
-    # VALIDATION PHASE
-    # ERROR unless git status clean
-    # unless git_status_clean?
-    #   println RED, "Uncommitted changes! Toolbus tracks completions by commit SHA1, so please commit and push before running."
-    #   exit
-    # end
-    # ERROR unless latest SHA1 is on github
+  def initialize
+    validate_repo
+    @features = fetch_features
+  end
 
-    # GET all features for our tools and version
+  def fetch_features
+    # GET all features for our tools and versions
+    JSON.parse(File.read(File.open('./spec/fixture/sample.json')))
+  end
 
+  def validate_repo
+    View::Errors.uncommitted_changes unless git_status_clean?
+    View::Errors.unpushed_commits unless latest_commit_online?
+  end
+
+  def update_grammars
     # UPDATE GRAMMAR LIBRARY
     # check all grammar_urls for files we don't have
-
     # GET those files
+  end
 
-    # DATA PREPARATION
+  def scan
     # TRANSLATE globs to mapping of full_path => array of grammars
-
     # SCANNING AND PUSHING PHASE
     # EACH file with tasks
       # EACH feature
@@ -81,10 +89,9 @@ class Toolbus
         # increment progress bar
         # refresh view
       # POST new feature completions.
-        # 
-
   end
 end
 
-Toolbus.scan
-binding.pry
+toolbus = Toolbus.new
+toolbus.update_grammars
+toolbus.scan

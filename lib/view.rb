@@ -42,6 +42,18 @@ end
 class View
   extend TerminalUtils
 
+  module Errors
+    include TerminalUtils
+
+    def self.unpushed_commits
+      puts "#{RED}Unpushed commits! Toolbus relies on Github to show code samples, so your code should be online. Please push before running.#{RESET}"
+    end
+
+    def self.uncommitted_changes
+      puts "#{RED}Uncommitted changes! Toolbus tracks completions by commit SHA1, so please commit and push before running.#{RESET}"
+    end
+  end
+
   def self.print_page
 
   end
