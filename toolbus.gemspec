@@ -15,5 +15,10 @@ Gem::Specification.new do |s|
   s.executables = ['toolbus']
   s.require_paths = ['lib']
 
+
+  s.add_runtime_dependency 'highline', '~> 1.7'
+  s.add_runtime_dependency 'treetop', '~> 1.6'
+  s.add_runtime_dependency 'json_pure', '~> 1.8'
   s.add_development_dependency 'rspec', '~> 3.2'
+  s.add_development_dependency 'pry', '~> 0.10'
 end

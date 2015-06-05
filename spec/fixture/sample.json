@@ -1,0 +1,111 @@
+{ 
+  "data": [{
+    "type": "feature",
+    "id": 1,
+    "name": "Optimistic locking",
+    "module": "ActiveRecord::Locking",
+    "rubric_glob": "app/models/**/*rb",
+    "grammar_version": "1",
+    "grammar_url": "features/1/grammars/1.treetop",
+    "rubric_criteria": ".locking_column = :symbol"
+  }, {
+    "type": "feature",
+    "id": 2,
+    "name": "Pessimistic locking",
+    "module": "ActiveRecord::Locking",
+    "rubric_glob": "app/**/*.rb",
+    "grammar_version": "1",
+    "grammar_url": "features/2/grammars/1.treetop",
+    "rubric_criteria": ".lock! OR .with_lock"
+  }, {
+    "type": "feature",
+    "id": 3,
+    "name": "Transactions",
+    "module": "ActiveRecord::Transactions",
+    "rubric_glob": "app/**/*.rb",
+    "grammar_version": "1",
+    "grammar_url": "features/3/grammars/1.treetop",
+    "rubric_criteria": ".transaction {...}"
+  }, {
+    "type": "feature",
+    "id": 4,
+    "name": "Single table inheritance",
+    "module": "ActiveRecord::Transactions",
+    "rubric_glob": "app/models/**/*rb",
+    "grammar_version": "1",
+    "grammar_url": "features/4/grammars/1.treetop",
+    "rubric_criteria": "class A < !ActiveRecord::Base  &&  whoever A does inherit from has type column."
+  }, {
+    "type": "feature",
+    "id": 5,
+    "name": "Alternative ActiveRecord initialization patterns",
+    "module": "ActiveRecord::Base",
+    "rubric_glob": "app/**/*.rb",
+    "grammar_version": "1",
+    "grammar_url": "features/5/grammars/1.treetop",
+    "rubric_criteria": "ModelClass.new {...}"
+  }, {
+    "type": "feature",
+    "id": 6,
+    "name": "Conditions",
+    "module": "ActiveRecord::Base",
+    "rubric_glob": "in AP,P",
+    "grammar_version": "1",
+    "grammar_url": "features/6/grammars/1.treetop",
+    "rubric_criteria": ".where([string that contains ?]"
+  }, {
+    "type": "feature",
+    "id": 7,
+    "name": "Saving arrays, hashes, and other non-mappable objects in text columns",
+    "module": "ActiveRecord::AttributeMethods::Serialization",
+    "rubric_glob": "app/models/**/*rb",
+    "grammar_version": "1",
+    "grammar_url": "features/7/grammars/1.treetop",
+    "rubric_criteria": "serialize :symbol"
+  }, {
+    "type": "feature",
+    "id": 8,
+    "name": "Connection to multiple databases in different models",
+    "module": "ActiveRecord::Base",
+    "rubric_glob": "app/**/*.rb",
+    "grammar_version": "1",
+    "grammar_url": "features/8/grammars/1.treetop",
+    "rubric_criteria": "MyModel.connection OR ActiveRecord::Base.connection"
+  }, {
+    "type": "feature",
+    "id": 9,
+    "name": "Connection to MongoDB",
+    "module": "ActiveJob::Enqueuing",
+    "rubric_glob": "app/models/**/*rb",
+    "grammar_version": "1",
+    "grammar_url": "features/9/grammars/1.treetop",
+    "rubric_criteria": "include Mongoid::Document"
+  }, {
+    "type": "feature",
+    "id": 10,
+    "name": "ActiveJob::Enqueueing#enqueue",
+    "module": "ActiveJob::Enqueuing",
+    "rubric_glob": "app/**/*.rb",
+    "grammar_version": "1",
+    "grammar_url": "features/10/grammars/1.treetop",
+    "rubric_criteria": ".enqueue"
+  }, {
+    "type": "feature",
+    "id": 11,
+    "name": "ActiveJob::Enqueueing#retry_job",
+    "module": "ActiveSupport::CoreExt",
+    "rubric_glob": "app/jobs/*.rb",
+    "grammar_version": "1",
+    "grammar_url": "features/11/grammars/1.treetop",
+    "rubric_criteria": ".retry_job"
+  }, {
+    "type": "feature",
+    "id": 12,
+    "name": "Benchmarking",
+    "module": "ActiveRecord::Inheritance",
+    "rubric_glob": "app/**/*.rb",
+    "grammar_version": "1",
+    "grammar_url": "features/12/grammars/1.treetop",
+    "rubric_criteria": "Benchmark.ms"
+  }]
+}
