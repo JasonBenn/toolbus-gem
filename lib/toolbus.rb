@@ -1,5 +1,5 @@
 class Toolbus
-  def scan
+  def self.scan
     puts 'hiii'
   end
 end
