@@ -4,108 +4,84 @@
     "id": 1,
     "name": "Optimistic locking",
     "module": "ActiveRecord::Locking",
-    "rubric_glob": "app/models/**/*rb",
-    "grammar_version": "1",
-    "grammar_url": "http://toolbus.herokuapp.com/grammars/features/1/1.treetop",
-    "rubric_criteria": ".locking_column = :symbol"
+    "search_in": "app/models/**/*rb",
+    "search_for": "locking_column = :ANYTHING"
   }, {
     "type": "feature",
     "id": 2,
     "name": "Pessimistic locking",
     "module": "ActiveRecord::Locking",
-    "rubric_glob": "app/**/*.rb",
-    "grammar_version": "1",
-    "grammar_url": "http://toolbus.herokuapp.com/grammars/features/2/1.treetop",
-    "rubric_criteria": ".lock! OR .with_lock"
+    "search_in": "app/**/*.rb",
+    "search_for": "lock! OR with_lock"
   }, {
     "type": "feature",
     "id": 3,
     "name": "Transactions",
     "module": "ActiveRecord::Transactions",
-    "rubric_glob": "app/**/*.rb",
-    "grammar_version": "1",
-    "grammar_url": "http://toolbus.herokuapp.com/grammars/features/3/1.treetop",
-    "rubric_criteria": ".transaction {...}"
+    "search_in": "app/**/*.rb",
+    "search_for": "class ANYTHING < ActiveRecord::Base\nend"
   }, {
     "type": "feature",
     "id": 4,
     "name": "Single table inheritance",
     "module": "ActiveRecord::Transactions",
-    "rubric_glob": "app/models/**/*rb",
-    "grammar_version": "1",
-    "grammar_url": "http://toolbus.herokuapp.com/grammars/features/4/1.treetop",
-    "rubric_criteria": "class A < !ActiveRecord::Base  &&  whoever A does inherit from has type column."
+    "search_in": "app/models/**/*rb",
+    "search_for": "ANYTHING < ActiveRecord::Base\nend"
   }, {
     "type": "feature",
     "id": 5,
     "name": "Alternative ActiveRecord initialization patterns",
     "module": "ActiveRecord::Base",
-    "rubric_glob": "app/**/*.rb",
-    "grammar_version": "1",
-    "grammar_url": "http://toolbus.herokuapp.com/grammars/features/5/1.treetop",
-    "rubric_criteria": "ModelClass.new {...}"
+    "search_in": "app/**/*.rb",
+    "search_for": "ANYTHING.new {}"
   }, {
     "type": "feature",
     "id": 6,
     "name": "Conditions",
     "module": "ActiveRecord::Base",
-    "rubric_glob": "in AP,P",
-    "grammar_version": "1",
-    "grammar_url": "http://toolbus.herokuapp.com/grammars/features/6/1.treetop",
-    "rubric_criteria": ".where([string that contains ?]"
+    "search_in": "in AP,P",
+    "search_for": "where(ANYTHING_MATCHING('?'))"
   }, {
     "type": "feature",
     "id": 7,
     "name": "Saving arrays, hashes, and other non-mappable objects in text columns",
     "module": "ActiveRecord::AttributeMethods::Serialization",
-    "rubric_glob": "app/models/**/*rb",
-    "grammar_version": "1",
-    "grammar_url": "http://toolbus.herokuapp.com/grammars/features/7/1.treetop",
-    "rubric_criteria": "serialize :symbol"
+    "search_in": "app/models/**/*rb",
+    "search_for": "serialize :ANYTHING"
   }, {
     "type": "feature",
     "id": 8,
     "name": "Connection to multiple databases in different models",
     "module": "ActiveRecord::Base",
-    "rubric_glob": "app/**/*.rb",
-    "grammar_version": "1",
-    "grammar_url": "http://toolbus.herokuapp.com/grammars/features/8/1.treetop",
-    "rubric_criteria": "MyModel.connection OR ActiveRecord::Base.connection"
+    "search_in": "app/**/*.rb",
+    "search_for": "MyModel.connection OR ActiveRecord::Base.connection"
   }, {
     "type": "feature",
     "id": 9,
     "name": "Connection to MongoDB",
     "module": "ActiveJob::Enqueuing",
-    "rubric_glob": "app/models/**/*rb",
-    "grammar_version": "1",
-    "grammar_url": "http://toolbus.herokuapp.com/grammars/features/9/1.treetop",
-    "rubric_criteria": "include Mongoid::Document"
+    "search_in": "app/models/**/*rb",
+    "search_for": "include Mongoid::Document"
   }, {
     "type": "feature",
     "id": 10,
     "name": "ActiveJob::Enqueueing#enqueue",
     "module": "ActiveJob::Enqueuing",
-    "rubric_glob": "app/**/*.rb",
-    "grammar_version": "1",
-    "grammar_url": "http://toolbus.herokuapp.com/grammars/features/10/1.treetop",
-    "rubric_criteria": ".enqueue"
+    "search_in": "app/**/*.rb",
+    "search_for": "enqueue"
   }, {
     "type": "feature",
     "id": 11,
     "name": "ActiveJob::Enqueueing#retry_job",
     "module": "ActiveSupport::CoreExt",
-    "rubric_glob": "app/jobs/*.rb",
-    "grammar_version": "1",
-    "grammar_url": "http://toolbus.herokuapp.com/grammars/features/11/1.treetop",
-    "rubric_criteria": ".retry_job"
+    "search_in": "app/jobs/*.rb",
+    "search_for": "retry_job"
   }, {
     "type": "feature",
     "id": 12,
     "name": "Benchmarking",
     "module": "ActiveRecord::Inheritance",
-    "rubric_glob": "app/**/*.rb",
-    "grammar_version": "1",
-    "grammar_url": "http://toolbus.herokuapp.com/grammars/features/12/1.treetop",
-    "rubric_criteria": "Benchmark.ms"
+    "search_in": "app/**/*.rb",
+    "search_for": "Benchmark.ms"
   }]
 }

@@ -2,4 +2,4 @@
 
 require 'toolbus'
 
-puts Toolbus.scan
+Toolbus.new.scan
