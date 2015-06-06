@@ -1,5 +1,6 @@
 require 'pry'
 require 'json/pure'
+require 'open-uri'
 
 SCREEN_WIDTH = [`tput cols`.to_i, 100].min
 def save_cursor; `tput sc`; end
@@ -63,8 +64,8 @@ class Toolbus
   end
 
   def fetch_features
-    # GET all features for our tools and versions
-    JSON.parse(File.read(File.open('./spec/fixture/sample.json')))
+    # TODO: GET all features for our tools and versions, once that API exists
+    JSON.parse(File.read(File.open('./spec/fixture/sample.json')))['data']
   end
 
   def validate_repo
@@ -72,10 +73,29 @@ class Toolbus
     View::Errors.unpushed_commits unless latest_commit_online?
   end
 
+  GRAMMARS_DIR = 'lib'
   def update_grammars
-    # UPDATE GRAMMAR LIBRARY
-    # check all grammar_urls for files we don't have
-    # GET those files
+    existing_grammars = Dir.glob('lib/grammars/**/*').select { |file| File.file? file }
+
+    needed_grammars = @features.reject do |feature|
+      latest_grammar = File.join(GRAMMARS_DIR, URI.parse(feature['grammar_url']).path)
+      existing_grammars.include? latest_grammar
+    end
+
+    needed_grammars.each do |feature|
+      grammar_url = feature['grammar_url']
+      path = URI.parse(grammar_url).path
+      grammar_dir = File.join(GRAMMARS_DIR, File.dirname(path))
+
+      FileUtils.mkdir_p grammar_dir unless Dir.exists? grammar_dir
+
+      View.update_status "Creating #{File.join(GRAMMARS_DIR, path)}"
+
+      # TODO: when files actually exist at those URLs.
+      # open(File.join(GRAMMARS_DIR, path), 'w') do |file|
+        # file << open(grammar_url).read
+      # end
+    end
   end
 
   def scan

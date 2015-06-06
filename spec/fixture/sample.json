@@ -6,7 +6,7 @@
     "module": "ActiveRecord::Locking",
     "rubric_glob": "app/models/**/*rb",
     "grammar_version": "1",
-    "grammar_url": "features/1/grammars/1.treetop",
+    "grammar_url": "http://toolbus.herokuapp.com/grammars/features/1/1.treetop",
     "rubric_criteria": ".locking_column = :symbol"
   }, {
     "type": "feature",
@@ -15,7 +15,7 @@
     "module": "ActiveRecord::Locking",
     "rubric_glob": "app/**/*.rb",
     "grammar_version": "1",
-    "grammar_url": "features/2/grammars/1.treetop",
+    "grammar_url": "http://toolbus.herokuapp.com/grammars/features/2/1.treetop",
     "rubric_criteria": ".lock! OR .with_lock"
   }, {
     "type": "feature",
@@ -24,7 +24,7 @@
     "module": "ActiveRecord::Transactions",
     "rubric_glob": "app/**/*.rb",
     "grammar_version": "1",
-    "grammar_url": "features/3/grammars/1.treetop",
+    "grammar_url": "http://toolbus.herokuapp.com/grammars/features/3/1.treetop",
     "rubric_criteria": ".transaction {...}"
   }, {
     "type": "feature",
@@ -33,7 +33,7 @@
     "module": "ActiveRecord::Transactions",
     "rubric_glob": "app/models/**/*rb",
     "grammar_version": "1",
-    "grammar_url": "features/4/grammars/1.treetop",
+    "grammar_url": "http://toolbus.herokuapp.com/grammars/features/4/1.treetop",
     "rubric_criteria": "class A < !ActiveRecord::Base  &&  whoever A does inherit from has type column."
   }, {
     "type": "feature",
@@ -42,7 +42,7 @@
     "module": "ActiveRecord::Base",
     "rubric_glob": "app/**/*.rb",
     "grammar_version": "1",
-    "grammar_url": "features/5/grammars/1.treetop",
+    "grammar_url": "http://toolbus.herokuapp.com/grammars/features/5/1.treetop",
     "rubric_criteria": "ModelClass.new {...}"
   }, {
     "type": "feature",
@@ -51,7 +51,7 @@
     "module": "ActiveRecord::Base",
     "rubric_glob": "in AP,P",
     "grammar_version": "1",
-    "grammar_url": "features/6/grammars/1.treetop",
+    "grammar_url": "http://toolbus.herokuapp.com/grammars/features/6/1.treetop",
     "rubric_criteria": ".where([string that contains ?]"
   }, {
     "type": "feature",
@@ -60,7 +60,7 @@
     "module": "ActiveRecord::AttributeMethods::Serialization",
     "rubric_glob": "app/models/**/*rb",
     "grammar_version": "1",
-    "grammar_url": "features/7/grammars/1.treetop",
+    "grammar_url": "http://toolbus.herokuapp.com/grammars/features/7/1.treetop",
     "rubric_criteria": "serialize :symbol"
   }, {
     "type": "feature",
@@ -69,7 +69,7 @@
     "module": "ActiveRecord::Base",
     "rubric_glob": "app/**/*.rb",
     "grammar_version": "1",
-    "grammar_url": "features/8/grammars/1.treetop",
+    "grammar_url": "http://toolbus.herokuapp.com/grammars/features/8/1.treetop",
     "rubric_criteria": "MyModel.connection OR ActiveRecord::Base.connection"
   }, {
     "type": "feature",
@@ -78,7 +78,7 @@
     "module": "ActiveJob::Enqueuing",
     "rubric_glob": "app/models/**/*rb",
     "grammar_version": "1",
-    "grammar_url": "features/9/grammars/1.treetop",
+    "grammar_url": "http://toolbus.herokuapp.com/grammars/features/9/1.treetop",
     "rubric_criteria": "include Mongoid::Document"
   }, {
     "type": "feature",
@@ -87,7 +87,7 @@
     "module": "ActiveJob::Enqueuing",
     "rubric_glob": "app/**/*.rb",
     "grammar_version": "1",
-    "grammar_url": "features/10/grammars/1.treetop",
+    "grammar_url": "http://toolbus.herokuapp.com/grammars/features/10/1.treetop",
     "rubric_criteria": ".enqueue"
   }, {
     "type": "feature",
@@ -96,7 +96,7 @@
     "module": "ActiveSupport::CoreExt",
     "rubric_glob": "app/jobs/*.rb",
     "grammar_version": "1",
-    "grammar_url": "features/11/grammars/1.treetop",
+    "grammar_url": "http://toolbus.herokuapp.com/grammars/features/11/1.treetop",
     "rubric_criteria": ".retry_job"
   }, {
     "type": "feature",
@@ -105,7 +105,7 @@
     "module": "ActiveRecord::Inheritance",
     "rubric_glob": "app/**/*.rb",
     "grammar_version": "1",
-    "grammar_url": "features/12/grammars/1.treetop",
+    "grammar_url": "http://toolbus.herokuapp.com/grammars/features/12/1.treetop",
     "rubric_criteria": "Benchmark.ms"
   }]
 }
