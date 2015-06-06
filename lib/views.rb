@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module TerminalUtils
   SCREEN_WIDTH = [`tput cols`.to_i, 100].min
   SAVE_CURSOR = `tput sc`
