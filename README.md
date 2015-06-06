@@ -10,6 +10,7 @@ Blueprint details
 Todo:
 
 * Write Toolbus#fetch_features.
+* POST /completions correctly, and update the status message.
 * Implement SyntaxTree.include?
 * Test various SyntaxTree inclusions.
 * Fill out README.

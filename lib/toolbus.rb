@@ -47,7 +47,7 @@ class Toolbus
         if match
           feature = @features.find { |feature| feature['id'] == id }
           feature['count'] += 1
-          statuses << "POST /completions: repo_url: #{repo_url}, feature_id: #{id}, commit: ???, filename: #{file}, first_line: #{match[:first_line]}, last_line: #{match[:last_line]}"
+          statuses << "POST /completions: repo_url: #{repo_url}, feature_id: #{id}, filename: #{file}, first_line: #{match[:first_line]}, last_line: #{match[:last_line]}, commit: #{head_sha}"
         end
 
         percent_complete = (progress / num_steps) * 100
