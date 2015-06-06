@@ -50,12 +50,14 @@ class TableView
     @map = map
   end
 
+  CHECKMARK_CHARS_OFFSET = 2
+  COUNT_CHARS_OFFSET = 5
   def to_s
     @map.map do |(key, count)|
       color = count > 0 ? GREEN : RED
       done = count > 0 ? "✓" : " "
-      description = key.truncate(SCREEN_WIDTH - 4).ljust(SCREEN_WIDTH - 3)
-      [color, done, ' ', description, count.to_s, RESET].join
+      description = key.at_width(SCREEN_WIDTH - COUNT_CHARS_OFFSET - CHECKMARK_CHARS_OFFSET)
+      [color, done, ' ', description, count.to_s.rjust(COUNT_CHARS_OFFSET), RESET].join
     end
   end
 end
@@ -72,6 +74,6 @@ class StatusBoxView
     puts
     num_lines = @statuses.length
     lines = @statuses.last(8).fill(num_lines, 8 - num_lines) { '' }
-    lines.map { |line| line.truncate(SCREEN_WIDTH).ljust(SCREEN_WIDTH) }.join("\n")
+    lines.map { |line| line.at_width(SCREEN_WIDTH) }.join("\n")
   end
 end

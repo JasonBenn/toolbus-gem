@@ -48,4 +48,8 @@ class String
 
     "#{self[0, stop]}#{omission}"
   end
+
+  def at_width(width)
+    truncate(width).ljust(width)
+  end
 end
