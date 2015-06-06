@@ -9,7 +9,7 @@ Blueprint details
 
 Todo:
 
+* Write Toolbus#fetch_features.
 * Implement SyntaxTree.include?
-* Fix StatusBoxView bug - the terminal line isn't clearing properly.
-* Fill out README.
 * Test various SyntaxTree inclusions.
+* Fill out README.

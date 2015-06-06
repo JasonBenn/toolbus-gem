@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 module TerminalUtils
-  SCREEN_WIDTH = [`tput cols`.to_i, 100].min
+  SCREEN_WIDTH = [`tput cols`.to_i, 130].min
   SAVE_CURSOR = `tput sc`
   RESTORE_CURSOR = `tput rc`
   ERASE_DISPLAY = `tput clear`
@@ -71,6 +71,7 @@ class StatusBoxView
     puts '-' * SCREEN_WIDTH
     puts
     num_lines = @statuses.length
-    @statuses.last(8).fill(num_lines, 8 - num_lines) { '' }
+    lines = @statuses.last(8).fill(num_lines, 8 - num_lines) { '' }
+    lines.map { |line| line.truncate(SCREEN_WIDTH).ljust(SCREEN_WIDTH) }.join("\n")
   end
 end

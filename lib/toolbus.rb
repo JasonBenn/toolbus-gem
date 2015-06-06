@@ -80,7 +80,7 @@ class Toolbus
   end
 
   def features_found
-    @features.map { |feature| [feature_module_and_name(feature), feature['count']] }.to_h
+    Hash[@features.map { |feature| [feature_module_and_name(feature), feature['count']] }]
   end
 
   def num_completions
