@@ -1,5 +1,3 @@
-require 'pry'
-
 module TerminalUtils
   SCREEN_WIDTH = [`tput cols`.to_i, 100].min
   SAVE_CURSOR = `tput sc`
@@ -21,16 +19,16 @@ class ConsoleManager
     rows.each { |row| puts row.to_s; puts }
   end
 
-  def self.error
+  def self.error(message)
     puts RED + message + RESET
-    # TODO: uncomment.
-    # exit
+    exit
   end
 end
 
 class ProgressBarView
   include TerminalUtils
-  USABLE_WIDTH = SCREEN_WIDTH - 8 # accounts for bracket and percentage complete characters
+  EXTRA_CHARS_OFFSET = 8 # brackets, % completion
+  USABLE_WIDTH = SCREEN_WIDTH - EXTRA_CHARS_OFFSET
 
   def initialize(percent)
     @percent = Float([percent, 100.0].min)

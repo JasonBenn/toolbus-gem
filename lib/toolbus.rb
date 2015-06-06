@@ -1,60 +1,9 @@
-require 'pry'
 require 'json/pure'
 require 'open-uri'
 require_relative './views.rb'
+require_relative './utils.rb'
 
 TOOLBUS_ROOT = File.join(`gem which toolbus`.chomp.chomp("/lib/toolbus.rb"))
-
-require 'parser/current'
-class SyntaxTree
-  def initialize(ruby)
-    # TODO: turn on, once you have a real implementation
-    # @ast = Parser::CurrentRuby.parse(ruby)
-  end
-
-  def include?(smaller_ast)
-    # TODO: find if smaller_ast is a subset of self.
-    rand < 0.4 ? { first_line: 10, last_line: 12 } : nil
-  end
-end
-
-module GitUtils
-  attr_reader :repo_url, :head_sha
-
-  def git_status_clean?
-    `git status -s`.length == 0
-  end
-
-  def latest_commit_online?
-    `git log --oneline origin/master..HEAD`.length == 0
-  end
-
-  def repo_url
-    @repo_url ||= `git config --get remote.origin.url`.gsub('git@github.com:', '').chomp
-  end
-
-  def head_sha
-    @head_sha ||= `git rev-parse HEAD`
-  end
-end
-
-# Pulled from ActionSupport.
-class String
-  def truncate(truncate_at, options = {})
-    return dup unless length > truncate_at
-
-    omission = options[:omission] || '...'
-    length_with_room_for_omission = truncate_at - omission.length
-    stop = \
-      if options[:separator]
-        rindex(options[:separator], length_with_room_for_omission) || length_with_room_for_omission
-      else
-        length_with_room_for_omission
-      end
-
-    "#{self[0, stop]}#{omission}"
-  end
-end
 
 class Toolbus
   include GitUtils
@@ -62,6 +11,16 @@ class Toolbus
   def initialize
     validate_repo
     @features = fetch_features
+  end
+
+  def validate_repo
+    ConsoleManager.error "Unpushed commits! Push or stash before running." unless latest_commit_online?
+    ConsoleManager.error "Uncommitted changes! Stash or commit and push before running." unless git_status_clean?
+  end
+
+  def fetch_features
+    # TODO: GET all features for our tools and versions, once that API exists
+    JSON.parse(File.read(File.open(File.join(TOOLBUS_ROOT, 'spec/fixture/sample.json'))))['data']
   end
 
   SCAN_TIME_SECONDS = 4.0
@@ -103,19 +62,8 @@ class Toolbus
     end
   end
 
-  private
-
-  def fetch_features
-    # TODO: GET all features for our tools and versions, once that API exists
-    JSON.parse(File.read(File.open(File.join(TOOLBUS_ROOT, 'spec/fixture/sample.json'))))['data']
-  end
-
-  def validate_repo
-    # ConsoleManager.error "Unpushed commits! Toolbus relies on Github to show code samples,
-    # so your code should be online. Please push before running" unless git_status_clean?
-    # ConsoleManager.error "Uncommitted changes! Toolbus tracks completions by commit SHA1, so please commit and push before running." unless latest_commit_online?
-  end
-
+  private 
+  
   def scanning_plan
     hash_with_array_values = Hash.new { |h, k| h[k] = [] }
 
