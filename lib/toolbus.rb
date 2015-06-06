@@ -16,31 +16,32 @@ def print_line(message, color)
   puts [color, message, reset].join
 end
 
+TOOLBUS_ROOT = File.join(`gem which toolbus`.chomp.chomp("/lib/toolbus.rb"))
 
-api_response = JSON.parse(File.read(File.open('./spec/fixture/sample.json')))
-times_encountered = api_response['data'].map { |feature| ["[#{feature['module']}]: #{feature['name']}", 0] }.to_h
+# api_response = JSON.parse(File.read(File.open('./spec/fixture/sample.json')))
+# times_encountered = api_response['data'].map { |feature| ["[#{feature['module']}]: #{feature['name']}", 0] }.to_h
 
-progress = ProgressBar.new(times_encountered.length)
-until true || progress.done? do
-  puts progress
-  # debug_counter = 0
-  times_encountered.each do |(key, value)|
-    # debug_counter += 1
-    # puts debug_counter
-    progress.increment
-    times_encountered[key] += 1 if rand(100) < 40
-    color = value > 0 ? green : red
-    done = value > 0 ? "✓" : " "
-    count = value.to_s
-    message = done + ' ' + key.ljust(SCREEN_WIDTH - 3) + count
-    print_line message, color
-  end
+# progress = ProgressBar.new(times_encountered.length)
+# until true || progress.done? do
+#   puts progress
+#   # debug_counter = 0
+#   times_encountered.each do |(key, value)|
+#     # debug_counter += 1
+#     # puts debug_counter
+#     progress.increment
+#     times_encountered[key] += 1 if rand(100) < 40
+#     color = value > 0 ? green : red
+#     done = value > 0 ? "✓" : " "
+#     count = value.to_s
+#     message = done + ' ' + key.ljust(SCREEN_WIDTH - 3) + count
+#     print_line message, color
+#   end
 
-  num_requirements = times_encountered.inject(0) { |accum, (k, v)| accum + v }
-  num_features = times_encountered.select { |k, v| v > 0 }.length
-  puts "Found #{num_requirements} requirements in #{num_features} features!"
-  sleep 0.4
-end
+#   num_requirements = times_encountered.inject(0) { |accum, (k, v)| accum + v }
+#   num_features = times_encountered.select { |k, v| v > 0 }.length
+#   puts "Found #{num_requirements} requirements in #{num_features} features!"
+#   sleep 0.4
+# end
 
 def git_status_clean?
   `git status -s`.length == 0
@@ -65,7 +66,7 @@ class Toolbus
 
   def fetch_features
     # TODO: GET all features for our tools and versions, once that API exists
-    JSON.parse(File.read(File.open('./spec/fixture/sample.json')))['data']
+    JSON.parse(File.read(File.open(File.join(TOOLBUS_ROOT, 'spec/fixture/sample.json'))))['data']
   end
 
   def validate_repo
@@ -73,9 +74,9 @@ class Toolbus
     View::Errors.unpushed_commits unless latest_commit_online?
   end
 
-  GRAMMARS_DIR = 'lib'
+  GRAMMARS_DIR = File.join(TOOLBUS_ROOT, 'lib')
   def update_grammars
-    existing_grammars = Dir.glob('lib/grammars/**/*').select { |file| File.file? file }
+    existing_grammars = Dir.glob(File.join(GRAMMARS_DIR, '/grammars/**/*')).select { |file| File.file? file }
 
     needed_grammars = @features.reject do |feature|
       latest_grammar = File.join(GRAMMARS_DIR, URI.parse(feature['grammar_url']).path)
@@ -99,6 +100,7 @@ class Toolbus
   end
 
   def scan
+    # binding.pry
     # TRANSLATE globs to mapping of full_path => array of grammars
     # SCANNING AND PUSHING PHASE
     # EACH file with tasks
