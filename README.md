@@ -13,3 +13,4 @@ Todo:
 * Implement SyntaxTree.include?
 * Test various SyntaxTree inclusions.
 * Fill out README.
+* Fix display bug when you invoke toolbus when {toolbus height} > {remaining console height}.
