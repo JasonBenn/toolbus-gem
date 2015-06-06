@@ -74,12 +74,16 @@ class Toolbus
     View::Errors.unpushed_commits unless latest_commit_online?
   end
 
+  def grammar_url_to_file(url)
+    File.join(GRAMMARS_DIR, URI.parse(url).path)
+  end
+
   GRAMMARS_DIR = File.join(TOOLBUS_ROOT, 'lib')
   def update_grammars
     existing_grammars = Dir.glob(File.join(GRAMMARS_DIR, '/grammars/**/*')).select { |file| File.file? file }
 
     needed_grammars = @features.reject do |feature|
-      latest_grammar = File.join(GRAMMARS_DIR, URI.parse(feature['grammar_url']).path)
+      latest_grammar = grammar_url_to_file(feature['grammar_url'])
       existing_grammars.include? latest_grammar
     end
 
@@ -99,18 +103,34 @@ class Toolbus
     end
   end
 
-  def scan
-    # binding.pry
+  def scanning_plan
     # TRANSLATE globs to mapping of full_path => array of grammars
-    # SCANNING AND PUSHING PHASE
-    # EACH file with tasks
-      # EACH feature
+    grammars_by_file = Hash.new { |h, k| h[k] = [] }
+
+    @features.each do |feature|
+      grammar = grammar_url_to_file(feature['grammar_url'])
+
+      files = Dir.glob(feature['rubric_glob']).each do |file|
+        grammars_by_file[file] << grammar
+      end
+    end
+
+    grammars_by_file
+  end
+
+  def scan
+    scanning_plan.each do |file, tasks|
+      View.update_status "Scanning #{file}"
+      tasks.each do |task|
+        # binding.pry
         # IF feature found?
           # add feature completion to POST request
           # update progress values!
         # increment progress bar
         # refresh view
+      end
       # POST new feature completions.
+    end
   end
 end
 
