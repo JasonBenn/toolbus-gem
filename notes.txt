@@ -11,35 +11,44 @@ Probably, for now: manually turn Guides into features. Damn.
 style inspiration: https://www.typesafe.com/community/core-tools/activator-and-sbt
 
 
-
-FEATURE
+ACHIEVEMENT
 id
-name (scopes)
-summary (method scope in app/models/*.rb)
-tool (ActiveRecord)
-module (ActiveRecord::Locking)
-documentation_url (url)
-version_added 2.1
-version_removed 4.2.1 (or null)
-rubric_glob
-rubric_criteria
-grammar_version
-grammar_url
+name (scopes) NOT NULL
+summary (method scope in app/models/*.rb) NULL
+module (ActiveRecord::Locking) NULL
+documentation_url (url) NULL
+version_added 2.1 NULL
+version_removed 4.2.1 NULL
+version DEFAULT 1
 has_many completions
+has_one snippet: (mongo ID)
 
-what happens when:
-  name of feature changes
-  grammar version will change sometimes - no need to have old version tho
-  
+SNIPPET: (mongo array)
+[
+  "(",
+  {parser, glob, code}
+  "||",
+  {parser, glob, code}
+  ")",
+  "&&",
+  {parser, glob, code}
+]
 
 USER
 id
 username
+image_url
 has_many repos
 
 TOOL
-name (rails, rails api, ember.js, ember-data)
+name (rails api, ember.js, CSS, python, html, javascript, ruby)
+primary color
+secondary color
 has_many repos
+has_many features
+  installation instructions?
+  description?
+  homepage?
 
 TOOL_REPOS
 tool_id
@@ -59,13 +68,31 @@ has_many completions
 COMPLETION:
 id
 belongs_to repo
-belongs_to feature
+belongs_to achievement
 commit SHA1
 filename
 line_start
 line_end
+  gist_url NULL
 
 
+
+
+
+GO TO HOME
+GET all tools
+SEARCH all users by name
+SEARCH all repos by name
+GET LATEST completions (eager load repo name, eager load achievement name)
+GET stats on all completions
+
+USER PROFILE
+see their image
+see all their completions (by repo)
+
+PROJECT PAGE
+see all achievements that project earned 
+% of total tool API used in that project
 
 GEM REQUEST:
 Needs: name, module, rubric_glob, rubric_criteria

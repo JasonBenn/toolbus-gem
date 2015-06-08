@@ -3,7 +3,7 @@ Gem::Specification.new do |s|
   s.description = "Scans and parses clean git repos, figures out how much of an API you've used"
 
   s.name        = 'toolbus'
-  s.version     = '0.1.4'
+  s.version     = '0.1.5'
   s.date        = '2015-06-05'
   s.authors     = ["Jason Benn"]
   s.email       = 'jasoncbenn@gmail.com'

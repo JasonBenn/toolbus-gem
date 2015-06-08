@@ -20,7 +20,7 @@ module GitUtils
   end
 
   def latest_commit_online?
-    `git log --oneline origin/master..HEAD`.length == 0
+    `git log --oneline $(git remote)/master...HEAD`.length == 0
   end
 
   def repo_url
